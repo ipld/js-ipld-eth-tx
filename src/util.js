@@ -1,16 +1,16 @@
 'use strict'
 
-const EthBlockHeader = require('ethereumjs-block/header')
+const Transaction = require('ethereumjs-tx')
 const cidForHash = require('./common').cidForHash
 
 exports.deserialize = function(data) {
-  return new EthBlockHeader(data)
+  return new Transaction(data)
 }
 
-exports.serialize = function(blockHeader) {
-  return blockHeader.serialize()
+exports.serialize = function(tx) {
+  return tx.serialize()
 }
 
-exports.cid = function(blockHeader) {
-  return cidForHash('eth-block', blockHeader.hash())
+exports.cid = function(tx) {
+  return cidForHash('eth-tx', tx.hash())
 }

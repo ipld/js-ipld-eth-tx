@@ -1,14 +1,14 @@
 {
-  "name": "js-ipld-eth-block",
+  "name": "js-ipld-eth-tx",
   "version": "1.0.0",
-  "description": "JavaScript Implementation of the IPLD format - Ethereum Block",
+  "description": "JavaScript Implementation of the IPLD format - Ethereum Transaction",
   "main": "src/index.js",
   "directories": {
     "test": "test"
   },
   "dependencies": {
     "cids": "^0.1.1",
-    "ethereumjs-block": "^1.3.1",
+    "ethereumjs-tx": "^1.1.2",
     "multihashes": "^0.2.2"
   },
   "devDependencies": {
@@ -20,12 +20,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ipld/js-ipld-eth-block.git"
+    "url": "git+https://github.com/ipld/js-ipld-eth-tx.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/ipld/js-ipld-eth-block/issues"
+    "url": "https://github.com/ipld/js-ipld-eth-tx/issues"
   },
-  "homepage": "https://github.com/ipld/js-ipld-eth-block#readme"
+  "homepage": "https://github.com/ipld/js-ipld-eth-tx#readme"
 }

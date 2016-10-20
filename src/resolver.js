@@ -5,7 +5,7 @@ const cidForHash = require('./common').cidForHash
 
 exports = module.exports
 
-exports.multicodec = 'eth-block'
+exports.multicodec = 'eth-tx'
 
 /*
  * resolve: receives a path and a block and returns the value on path,
@@ -49,93 +49,74 @@ exports.tree = (block, options) => {
     options = {}
   }
 
-  const blockHeader = util.deserialize(block.data)
-  const paths = []  
+  const tx = util.deserialize(block.data)
+  const paths = []
 
-  // external links
-  paths.push({
-    path: 'parent',
-    value: { '/': cidForHash('eth-block', blockHeader.parentHash) },
-  })
-  paths.push({
-    path: 'ommers',
-    value: { '/': cidForHash('eth-block-list', blockHeader.uncleHash) },
-  })
-  paths.push({
-    path: 'transactions',
-    value: { '/': cidForHash('eth-tx-trie', blockHeader.transactionsTrie) },
-  })
-  paths.push({
-    path: 'transactionReceipts',
-    value: { '/': cidForHash('eth-tx-receipt-trie', blockHeader.receiptTrie) },
-  })
-  paths.push({
-    path: 'state',
-    value: { '/': cidForHash('eth-state-trie', blockHeader.stateRoot) },
-  })
+  nonce: '0x00',
+  gasPrice: '0x09184e72a000', 
+  gasLimit: '0x2710',
+  to: '0x0000000000000000000000000000000000000000', 
+  value: '0x00', 
+  data: '0x7f7465737432000000000000000000000000000000000000000000000000000000600057'
 
-  // external links as data
-  paths.push({
-    path: 'parentHash',
-    value: blockHeader.parentHash,
-  })
-  paths.push({
-    path: 'ommerHash',
-    value: blockHeader.uncleHash,
-  })
-  paths.push({
-    path: 'transactionTrieRoot',
-    value: blockHeader.transactionsTrie,
-  })
-  paths.push({
-    path: 'transactionReceiptTrieRoot',
-    value: blockHeader.receiptTrie,
-  })
-  paths.push({
-    path: 'stateRoot',
-    value: blockHeader.stateRoot,
-  })
+  // external links (none)
 
+  // external links as data (none)
+  
   // internal data
+
   paths.push({
-    path: 'authorAddress',
-    value: blockHeader.coinbase,
+    path: 'nonce',
+    value: tx.nonce,
   })
   paths.push({
-    path: 'bloom',
-    value: blockHeader.bloom,
-  })
-  paths.push({
-    path: 'difficulty',
-    value: blockHeader.difficulty,
-  })
-  paths.push({
-    path: 'number',
-    value: blockHeader.number,
+    path: 'gasPrice',
+    value: tx.gasPrice,
   })
   paths.push({
     path: 'gasLimit',
-    value: blockHeader.gasLimit,
+    value: tx.gasLimit,
   })
   paths.push({
-    path: 'gasUsed',
-    value: blockHeader.gasUsed,
+    path: 'to',
+    value: tx.to,
   })
   paths.push({
-    path: 'timestamp',
-    value: blockHeader.timestamp,
+    path: 'value',
+    value: tx.value,
   })
   paths.push({
-    path: 'extraData',
-    value: blockHeader.extraData,
+    path: 'data',
+    value: tx.data,
   })
   paths.push({
-    path: 'mixHash',
-    value: blockHeader.mixHash,
+    path: 'v',
+    value: tx.v,
   })
   paths.push({
-    path: 'nonce',
-    value: blockHeader.nonce,
+    path: 'r',
+    value: tx.r,
+  })
+  paths.push({
+    path: 's',
+    value: tx.s,
+  })
+
+  // helpers
+
+  paths.push({
+    path: 'from',
+    value: tx.from,
+  })
+
+  paths.push({
+    path: 'signature',
+    value: [tx.v, tx.r, tx.s],
+  })
+
+  paths.push({
+    path: 'isContractPublish',
+    value: tx.toCreationAddress(),
   })
 
   return paths

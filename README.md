@@ -1,2 +1,2 @@
-# js-ipld-eth-block
-JavaScript Implementation of the IPLD format - Ethereum Block
+# js-ipld-eth-tx
+JavaScript Implementation of the IPLD format - Ethereum Transaction
