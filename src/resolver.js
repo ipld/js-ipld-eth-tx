@@ -23,17 +23,17 @@ exports.resolve = (block, path) => {
   // check tree results
 
   let pathParts = path.split('/')
-  let firstPart = pathParts.unshift()
+  let firstPart = pathParts.shift()
   let remainderPath = pathParts.join('/')
 
-  let lookupResult = exports.tree(block).find(key => key === firstPart)
+  let treeResult = exports.tree(block).find(child => child.path === firstPart)
 
-  if (!lookupResult) {
-    throw new Error('Path not found.')
+  if (!treeResult) {
+    throw new Error('Path not found ("' + firstPart + '").')
   }
 
   return {
-    value: lookupResult,
+    value: treeResult.value,
     remainderPath: remainderPath,
   }
 
@@ -51,13 +51,6 @@ exports.tree = (block, options) => {
 
   const tx = util.deserialize(block.data)
   const paths = []
-
-  nonce: '0x00',
-  gasPrice: '0x09184e72a000', 
-  gasLimit: '0x2710',
-  to: '0x0000000000000000000000000000000000000000', 
-  value: '0x00', 
-  data: '0x7f7465737432000000000000000000000000000000000000000000000000000000600057'
 
   // external links (none)
 
