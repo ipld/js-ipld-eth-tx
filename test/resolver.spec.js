@@ -21,9 +21,13 @@ describe('IPLD format resolver (local)', () => {
     s:        new Buffer('6ee2a50ec62e958fa2c9e214dae7de8ab4ab9a951b621a9deb04bb1bb37dd20f', 'hex'),
   }
 
-  before(() => {
+  before((done) => {
     const testTx = new Transaction(testData)
-    testIpfsBlock = new IpfsBlock(dagEthBlock.util.serialize(testTx))
+    dagEthBlock.util.serialize(testTx, (err, result) => {
+      if (err) return done(err)
+      testIpfsBlock = new IpfsBlock(result)
+      done()
+    })
   })
 
   it('multicodec is eth-tx', () => {
@@ -35,18 +39,21 @@ describe('IPLD format resolver (local)', () => {
     describe('resolver.resolve', () => {
       
       it('path within scope', () => {
-        const result = resolver.resolve(testIpfsBlock, 'nonce')
-        expect(result.value.toString('hex')).to.equal(testData.nonce.toString('hex'))
-        // expect(result.value).to.equal(testData.nonce.toString('hex'))
+        resolver.resolve(testIpfsBlock, 'nonce', (err, result) => {
+          expect(err).to.not.exist
+          expect(result.value.toString('hex')).to.equal(testData.nonce.toString('hex'))
+          // expect(result.value).to.equal(testData.nonce.toString('hex'))
+        })
       })
 
     })
 
     it('resolver.tree', () => {
-      const paths = resolver.tree(testIpfsBlock)
-      // console.log(typeof paths)
-      // expect(Array.isArray(paths)).to.eql(true)
-      expect(typeof paths).to.eql('object')
+      const paths = resolver.tree(testIpfsBlock, (err, paths) => {
+        expect(err).to.not.exist
+        expect(typeof paths).to.eql('object')
+        // expect(Array.isArray(paths)).to.eql(true)
+      })
     })
 
   })
