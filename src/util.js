@@ -3,7 +3,7 @@
 const Transaction = require('ethereumjs-tx')
 const cidForHash = require('./common').cidForHash
 
-exports.deserialize = function(data, callback) {
+exports.deserialize = function (data, callback) {
   let deserialized
   try {
     deserialized = new Transaction(data)
@@ -13,7 +13,7 @@ exports.deserialize = function(data, callback) {
   callback(null, deserialized)
 }
 
-exports.serialize = function(tx, callback) {
+exports.serialize = function (tx, callback) {
   let serialized
   try {
     serialized = tx.serialize()
@@ -23,7 +23,7 @@ exports.serialize = function(tx, callback) {
   callback(null, serialized)
 }
 
-exports.cid = function(blockHeader, callback) {
+exports.cid = function (tx, callback) {
   let cid
   try {
     cid = cidForHash('eth-tx', tx.hash())
