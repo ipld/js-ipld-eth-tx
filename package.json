@@ -38,5 +38,9 @@
   "bugs": {
     "url": "https://github.com/ipld/js-ipld-eth-tx/issues"
   },
-  "homepage": "https://github.com/ipld/js-ipld-eth-tx#readme"
+  "homepage": "https://github.com/ipld/js-ipld-eth-tx#readme",
+  "contributors": [
+    "David Dias <daviddias.p@gmail.com>",
+    "kumavis <aaron@kumavis.me>"
+  ]
 }
