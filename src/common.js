@@ -1,14 +1,13 @@
-const CID = require('cids')
-const multihash = require('multihashes')
+'use strict'
 
-exports = {
-  cidForHash: cidForHash,
+const CID = require('cids')
+const multihashes = require('multihashes')
+
+module.exports = {
+  cidForHash: cidForHash
 }
 
-function cidForHash(codec, rawhash) {
-  return new CID({
-    version: 1,
-    codec: codec,
-    hash: multihash.encode(rawhash, 'keccak-256'),
-  }).toString()
+function cidForHash (codec, rawhash) {
+  var multihash = multihashes.encode(rawhash, 'keccak-256')
+  return new CID(1, codec, multihash)
 }

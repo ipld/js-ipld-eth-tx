@@ -1,22 +1,33 @@
 {
   "name": "js-ipld-eth-tx",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "JavaScript Implementation of the IPLD format - Ethereum Transaction",
   "main": "src/index.js",
   "directories": {
     "test": "test"
   },
   "dependencies": {
-    "cids": "^0.2.0",
+    "async": "^2.1.4",
+    "cids": "^0.3.4",
     "ethereumjs-tx": "^1.1.2",
-    "multihashes": "^0.2.2"
+    "multihashes": "^0.3.0"
   },
   "devDependencies": {
     "aegir": "^9.1.2",
-    "chai": "^3.5.0"
+    "chai": "^3.5.0",
+    "ipfs-block": "^0.5.3"
   },
   "scripts": {
-    "test": "aegir-test"
+    "test": "aegir-test",
+    "test:browser": "aegir-test --env browser",
+    "test:node": "aegir-test --env node",
+    "lint": "aegir-lint",
+    "release": "aegir-release",
+    "release-minor": "aegir-release --type minor",
+    "release-major": "aegir-release --type major",
+    "build": "aegir-build",
+    "coverage": "aegir-coverage",
+    "coverage-publish": "aegir-coverage publish"
   },
   "repository": {
     "type": "git",
@@ -27,5 +38,9 @@
   "bugs": {
     "url": "https://github.com/ipld/js-ipld-eth-tx/issues"
   },
-  "homepage": "https://github.com/ipld/js-ipld-eth-tx#readme"
+  "homepage": "https://github.com/ipld/js-ipld-eth-tx#readme",
+  "contributors": [
+    "David Dias <daviddias.p@gmail.com>",
+    "kumavis <aaron@kumavis.me>"
+  ]
 }
