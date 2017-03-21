@@ -1,6 +1,6 @@
 {
   "name": "ipld-eth-tx",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "JavaScript Implementation of the IPLD format - Ethereum Transaction",
   "main": "src/index.js",
   "directories": {
